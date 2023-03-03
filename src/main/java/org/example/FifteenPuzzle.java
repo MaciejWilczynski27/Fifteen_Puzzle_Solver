@@ -11,6 +11,17 @@ public class FifteenPuzzle {
 
     private final int boardHeight;
 
+    private String solution = "";
+
+    private int solutionLength = -1;
+
+    public String getSolution() {
+        return solution;
+    }
+
+    public int getSolutionLength() {
+        return solutionLength;
+    }
 
     private int[][] board;
     //Najpierw liczba kolumn, potem wiersze
