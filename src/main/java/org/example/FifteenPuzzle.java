@@ -71,6 +71,152 @@ public class FifteenPuzzle {
             e.printStackTrace();
         }
     }
+
+    public boolean checkBoard(){
+        if(board[getBoardWidth()-1][getBoardHeight()-1] != 0) {
+            return false;
+        }
+        for(int i = 0; i < getBoardHeight(); i++) {
+            for (int j = 0; j < getBoardWidth(); j++) {
+                    if(board[j][i] != 1 + j +getBoardWidth() * i) {
+                        if(j != getBoardWidth() - 1 && i != getBoardHeight() - 1) {
+                            return false;
+                        }
+                    }
+
+            }
+        }
+        return true;
+    }
+
+    public boolean isNotLeftEdge(int xpos) {
+        if(xpos>0) return true;
+        return false;
+    }
+
+    public boolean isNotRightEdge(int xpos) {
+        if(xpos<boardWidth-1) return true;
+        return false;
+    }
+
+    public boolean isNotUpperEdge(int ypos) {
+        if(ypos>0) return true;
+        return false;
+    }
+
+    public boolean isNotBottomEdge(int ypos) {
+        if(ypos<boardHeight-1) return true;
+        return false;
+    }
+
+    private void order(String letter) {
+        int x = 0;
+        int y = 0;
+
+        for(int i=0;i<boardHeight;i++) {
+            for(int j=0;j<boardWidth;j++) {
+                if(board[j][i]==0) {
+                    x=j;
+                    y=i;
+                }
+            }
+        }
+
+        switch(letter) {
+            case "L":
+                //x kolumny ; y wiersze
+                if(isNotLeftEdge(x)) {
+                    if(isNotRightEdge(x)) {
+                        if (board[x - 1][y] > board[x + 1][y]) {
+                            board[x][y] = board[x - 1][y];
+                            board[x - 1][y] = 0;
+                            x--;
+                            solution += "L";
+                        }
+                    } else {
+                        board[x][y] = board[x-1][y];
+                        board[x-1][y] = 0;
+                    }
+                }
+                break;
+            case "R":
+                if(isNotRightEdge(x)) {
+                    if(isNotLeftEdge(x)) {
+                        if (board[x + 1][y] > board[x - 1][y]) {
+                            board[x][y] = board[x + 1][y];
+                            board[x + 1][y] = 0;
+                            x++;
+                            solution += "R";
+                        }
+
+                    } else {
+                        board[x][y] = board[x+1][y];
+                        board[x+1][y] = 0;
+                    }
+                }
+                break;
+            case "U":
+                if(isNotUpperEdge(y)) {
+                    if(isNotBottomEdge(y)) {
+                        if (board[x][y-1] > board[x][y+1]) {
+                            board[x][y] = board[x][y-1];
+                            board[x][y-1] = 0;
+                            solution += "U";
+                        }
+                    } else {
+                        board[x][y] = board[x][y-1];
+                        board[x][y-1] = 0;
+                    }
+                }
+                break;
+            case "D":
+                if(isNotBottomEdge(y)) {
+                    if(isNotUpperEdge(y)) {
+                        if (board[x][y+1] > board[x][y-1]) {
+                            board[x][y] = board[x][y+1];
+                            board[x][y+1] = 0;
+                            solution += "D";
+                        }
+                    } else {
+                        board[x][y] = board[x][y+1];
+                        board[x][y+1] = 0;
+                    }
+                }
+                break;
+        }
+        if(solution.length()!= 0) {
+            solutionLength = solution.length();
+        }
+
+    }
+
+
+    public void breadthFirstSearch(String condition) {
+        print();
+        while (!checkBoard()) {
+            for (int i = 0; i < condition.length(); i++) {
+                switch (condition.charAt(i)) {
+
+                    case 'L':
+                        order("L");
+                        break;
+                    case 'R':
+                        order("R");
+                        break;
+                    case 'U':
+                        order("U");
+                        break;
+                    case 'D':
+                        order("D");
+                        break;
+                }
+                print();
+            }
+
+        }
+    }
+
+
     public int getBoardWidth() {
         return boardWidth;
     }
