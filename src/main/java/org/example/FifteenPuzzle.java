@@ -3,25 +3,16 @@ package org.example;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
-public class FifteenPuzzle {
+public class FifteenPuzzle implements Cloneable{
     private final int boardWidth;
 
     private final int boardHeight;
 
-    private String solution = "";
-
-    private int solutionLength = -1;
-
-    public String getSolution() {
-        return solution;
-    }
-
-    public int getSolutionLength() {
-        return solutionLength;
-    }
 
     private int[][] board;
     //Najpierw liczba kolumn, potem wiersze
@@ -36,6 +27,46 @@ public class FifteenPuzzle {
                     board[j][i] = Integer.parseInt(numbers[2 + j + i * boardHeight]);
                 }
             }
+    }
+    public int getFieldValue(int x, int y) {
+        return board[x][y];
+    }
+    public void setFieldValue(int x, int y, int value) {
+        board[x][y] = value;
+    }
+
+    public int[][] getBoard() {
+        return board;
+    }
+
+    public FifteenPuzzle(FifteenPuzzle fifteenPuzzle) {
+        this.boardWidth = fifteenPuzzle.getBoardWidth();
+        this.boardHeight = fifteenPuzzle.getBoardHeight();
+        this.board = new int[boardWidth][boardHeight];
+        for (int y = 0; y < this.getBoardHeight(); y++) {
+            for (int x = 0; x < this.getBoardWidth(); x++ ) {
+                this.board[x][y] = fifteenPuzzle.getBoard()[x][y];
+                }
+            }
+    }
+
+    @Override
+    protected Object clone() {
+        return new FifteenPuzzle(this);
+    }
+
+    public int[] findZero() {
+        int [] cord = new int[2];
+        for (int y = 0; y < boardHeight; y++) {
+            for (int x = 0; x < boardWidth; x++ ) {
+                if(board[x][y] == 0 ) {
+                    cord[0] = x;
+                    cord[1] = y;
+                    return cord;
+                }
+            }
+        }
+        return cord;
     }
     public void print() {
         String git = "Kolumny: " + getBoardWidth() + " Wiersze " + getBoardHeight() + "\n";
@@ -108,7 +139,14 @@ public class FifteenPuzzle {
         if(ypos<boardHeight-1) return true;
         return false;
     }
+    public int getBoardWidth() {
+        return boardWidth;
+    }
 
+    public int getBoardHeight() {
+        return boardHeight;
+    }
+/*
     private void order(String letter) {
         int x = 0;
         int y = 0;
@@ -217,11 +255,5 @@ public class FifteenPuzzle {
     }
 
 
-    public int getBoardWidth() {
-        return boardWidth;
-    }
-
-    public int getBoardHeight() {
-        return boardHeight;
-    }
+    }*/
 }

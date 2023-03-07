@@ -10,10 +10,9 @@ public class OverallTest {
         FifteenPuzzle fifteenPuzzle1 = new FifteenPuzzle("testfile.txt");
         assertFalse(fifteenPuzzle1.checkBoard());
         FifteenPuzzle fifteenPuzzle2 = new FifteenPuzzle("correctfile.txt");
-        fifteenPuzzle1.breadthFirstSearch("LRUD");
-        System.out.println(fifteenPuzzle1.getSolutionLength());
-        System.out.println(fifteenPuzzle1.getSolution());
-        assertTrue(fifteenPuzzle1.checkBoard());
+        assertFalse(fifteenPuzzle1.checkBoard());
         assertTrue(fifteenPuzzle2.checkBoard());
+        GameNode gameNode = new GameNode(5,fifteenPuzzle1);
+        System.out.println(gameNode.getMoveOrder());
     }
 }
