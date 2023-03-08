@@ -12,7 +12,15 @@ public class OverallTest {
         FifteenPuzzle fifteenPuzzle2 = new FifteenPuzzle("correctfile.txt");
         assertFalse(fifteenPuzzle1.checkBoard());
         assertTrue(fifteenPuzzle2.checkBoard());
-        GameNode gameNode = new GameNode(12,fifteenPuzzle1,"LRUD");
-        System.out.println(gameNode.getMoveOrder());
+       // GameNode gameNode = new GameNode(8,fifteenPuzzle1,"LDUR");
+        //System.out.println(gameNode.getMoveOrder());
+        BFS bfs = new BFS(16,fifteenPuzzle1,"LRUD");
+        bfs.findSolution();
+        System.out.println(bfs.getSolution());
+        System.out.println(bfs.getSolutionLength());
+        DFS dfs = new DFS(15,fifteenPuzzle1,"DURL");
+        dfs.findSolution();
+        System.out.println(dfs.getSolution());
+        System.out.println(dfs.getSolutionLength());
     }
 }

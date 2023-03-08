@@ -15,6 +15,7 @@ public class GameNode {
     private FifteenPuzzle currentBoard;
     private Vector<GameNode> children = new Vector<>();
 
+
     private String moveOrder = "";
     public boolean isCorrect() {
         return isCorrect;
@@ -33,11 +34,8 @@ public class GameNode {
         this.currentDepth = 0;
         this.currentBoard = fifteenPuzzle;
         if(getCurrentBoard().checkBoard()) {
-            setCorrect(true);
+           setCorrect(true);
         }
-        System.out.println(this.currentDepth);
-        System.out.println(this.getMoveOrder());
-        this.currentBoard.print();
         for (int i = 0; i < permutation.length(); i++) {
             switch (permutation.charAt(i)) {
                 case 'L':
@@ -92,10 +90,6 @@ public class GameNode {
         if(getCurrentBoard().checkBoard()) {
             setCorrect(true);
         }
-        System.out.println(this.currentDepth);
-        System.out.println(this.getMoveOrder());
-        System.out.println(this.getMoveOrder().endsWith("R"));
-        this.getCurrentBoard().print();
         if(getCurrentDepth() < getMaxDepth()) {
             for (int i = 0; i < permutation.length(); i++) {
                 switch (permutation.charAt(i)) {
@@ -213,4 +207,10 @@ public class GameNode {
     public void setCurrentBoard(FifteenPuzzle currentBoard) {
         this.currentBoard = currentBoard;
     }
+
+    public Vector<GameNode> getChildren() {
+        return children;
+    }
+
+
 }

@@ -1,33 +1,30 @@
 package org.example;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public class BFS {
+public class DFS {
     private String solution;
 
     private int solutionLength = -1;
     private GameNode gameNode;
 
-    public BFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {
+    public DFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {
         gameNode = new GameNode(maxDepth,fifteenPuzzle,permutation);
     }
-    public void findSolution() {
-       for (int i = 0; i <= gameNode.getMaxDepth(); i++) {
-           this.explore(i,gameNode);
-           }
-       }
 
-    public void explore(int i,GameNode childNode) {
+    public void findSolution() {
+        this.explore(gameNode);
+    }
+
+    public void explore(GameNode childNode) {
         if(solutionLength == - 1) {
-            if (childNode.getCurrentDepth() == 0 && childNode.isCorrect()) {
+            if (childNode.isCorrect()) {
                 return;
             }
             for (GameNode child : childNode.getChildren()) {
-                if (child.getCurrentDepth() >= i && child.isCorrect()) {
+                if (child.isCorrect()) {
                     this.setSolution(child.getMoveOrder());
                     this.setSolutionLength();
                 }
-                explore(i, child);
+                explore(child);
             }
         }
         else return;
