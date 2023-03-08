@@ -22,60 +22,96 @@ public class GameNode {
         this.maxDepth = maxDepth;
         this.currentDepth = 0;
         this.currentBoard = fifteenPuzzle;
+        System.out.println(this.currentDepth);
+        System.out.println(this.getMoveOrder());
+        this.currentBoard.print();
         for (int i = 0; i < permutation.length(); i++) {
             switch (permutation.charAt(i)) {
                 case 'L':
-                    if(this.moveLeft()) {
-                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    if(this.moveLeft() && !this.getMoveOrder().endsWith("R")) {
+                        FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                        int buffer = puzzleCopy.getFieldValue(getX() - 1 , getY());
+                        puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                        puzzleCopy.setFieldValue(getX() - 1,getY(),0);
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX() -  1, this.getY(), puzzleCopy, permutation));
                     }
                     break;
                 case 'R':
-                    if(this.moveRight()) {
-                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    if(this.moveRight() && !this.getMoveOrder().endsWith("L")) {
+                        FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                        int buffer = puzzleCopy.getFieldValue(getX() + 1 , getY());
+                        puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                        puzzleCopy.setFieldValue(getX() + 1,getY(),0);
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX() + 1, this.getY(), puzzleCopy, permutation));
                     }
                     break;
                 case 'U':
-                    if(this.moveUp()) {
-                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    if(this.moveUp() && !this.getMoveOrder().endsWith("D")) {
+                        FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                        int buffer = puzzleCopy.getFieldValue(getX() , getY() - 1);
+                        puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                        puzzleCopy.setFieldValue(getX(),getY() - 1,0);
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY() - 1, puzzleCopy, permutation));
                     }
                 case 'D':
-                    if(this.moveDown()) {
-                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    if(this.moveDown()&& !this.getMoveOrder().endsWith("U")) {
+                        FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                        int buffer = puzzleCopy.getFieldValue(getX() , getY() + 1);
+                        puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                        puzzleCopy.setFieldValue(getX(),getY() + 1,0);
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY() + 1, puzzleCopy, permutation));
                     }
             }
         }
     }
     //children and the following parents constructor
     public GameNode(int followingDepth,int maxDepth,String order,int x,int y,FifteenPuzzle fifteenPuzzle,String permutation) {
-        FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
         this.x = x;
         this.y = y;
         this.maxDepth = maxDepth;
         this.currentDepth = followingDepth;
-        this.currentBoard = puzzleCopy;
+        this.currentBoard = fifteenPuzzle;
         this.moveOrder = order;
         System.out.println(this.currentDepth);
         System.out.println(this.getMoveOrder());
+        System.out.println(this.getMoveOrder().endsWith("R"));
+        this.getCurrentBoard().print();
         if(getCurrentDepth() < getMaxDepth()) {
             for (int i = 0; i < permutation.length(); i++) {
                 switch (permutation.charAt(i)) {
                     case 'L':
-                        if(this.moveLeft()) {
-                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX(), this.getY(), puzzleCopy, permutation));
+                        if(this.moveLeft() && !this.getMoveOrder().endsWith("R")) {
+                            FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                            int buffer = puzzleCopy.getFieldValue(getX() - 1 , getY());
+                            puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                            puzzleCopy.setFieldValue(getX() - 1,getY(),0);
+                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX() -  1, this.getY(), puzzleCopy, permutation));
                         }
                         break;
                     case 'R':
-                        if(this.moveRight()) {
-                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX(), this.getY(), puzzleCopy, permutation));
+                        if(this.moveRight() && !this.getMoveOrder().endsWith("L")) {
+                            FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                            int buffer = puzzleCopy.getFieldValue(getX() + 1 , getY());
+                            puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                            puzzleCopy.setFieldValue(getX() + 1,getY(),0);
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX() + 1, this.getY(), puzzleCopy, permutation));
                         }
                         break;
                     case 'U':
-                        if(this.moveUp()) {
-                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY(), puzzleCopy, permutation));
+                        if(this.moveUp() && !this.getMoveOrder().endsWith("D")) {
+                            FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                            int buffer = puzzleCopy.getFieldValue(getX() , getY() - 1);
+                            puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                            puzzleCopy.setFieldValue(getX(),getY() - 1,0);
+                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY() - 1, puzzleCopy, permutation));
                         }
                     case 'D':
-                        if(this.moveDown()) {
-                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY(), puzzleCopy, permutation));
+                        if(this.moveDown()&& !this.getMoveOrder().endsWith("U")) {
+                            FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
+                            int buffer = puzzleCopy.getFieldValue(getX() , getY() + 1);
+                            puzzleCopy.setFieldValue(getX() , getY(),buffer);
+                            puzzleCopy.setFieldValue(getX(),getY() + 1,0);
+                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY() + 1, puzzleCopy, permutation));
                         }
                 }
             }
@@ -88,40 +124,24 @@ public class GameNode {
 
     public boolean moveLeft(){
         if (getX() > 0) {
-            int buffer = this.getCurrentBoard().getFieldValue(getX() - 1 , getY());
-            this.getCurrentBoard().setFieldValue(getX() - 1, getY(),buffer);
-            this.getCurrentBoard().setFieldValue(getX(),getY(),0);
-            this.setX(getX() - 1);
             return true;
         }
         return false;
     }
     public boolean moveRight(){
         if (getX() < this.getCurrentBoard().getBoardWidth() - 1) {
-            int buffer = this.getCurrentBoard().getFieldValue(getX() + 1 , getY());
-            this.getCurrentBoard().setFieldValue(getX() + 1, getY(),buffer);
-            this.getCurrentBoard().setFieldValue(getX(),getY(),0);
-            this.setX(getX() + 1);
             return true;
         }
         return false;
     }
     public boolean moveUp(){
-        if (getY() < 0) {
-            int buffer = this.getCurrentBoard().getFieldValue(getX() , getY() - 1);
-            this.getCurrentBoard().setFieldValue(getX(), getY() - 1,buffer);
-            this.getCurrentBoard().setFieldValue(getX(),getY(),0);
-            this.setY(getY() - 1);
+        if (getY() > 0) {
             return true;
         }
         return false;
     }
     public boolean moveDown(){
         if (getY() < this.getCurrentBoard().getBoardHeight() - 1) {
-            int buffer = this.getCurrentBoard().getFieldValue(getX() , getY() + 1);
-            this.getCurrentBoard().setFieldValue(getX(), getY() + 1,buffer);
-            this.getCurrentBoard().setFieldValue(getX(),getY(),0);
-            this.setY(getY() + 1);
             return true;
         }
         return false;
