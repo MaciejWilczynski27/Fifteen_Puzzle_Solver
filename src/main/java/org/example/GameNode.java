@@ -16,24 +16,70 @@ public class GameNode {
     private String moveOrder = "";
 
     //first parent node constructor
-    public GameNode(int maxDepth,FifteenPuzzle fifteenPuzzle) {
+    public GameNode(int maxDepth,FifteenPuzzle fifteenPuzzle,String permutation) {
         this.x = fifteenPuzzle.findZero()[0];
         this.y = fifteenPuzzle.findZero()[1];
         this.maxDepth = maxDepth;
         this.currentDepth = 0;
         this.currentBoard = fifteenPuzzle;
-        new GameNode(getCurrentDepth() + 1,getMaxDepth(),getMoveOrder(),getX(),getY(),fifteenPuzzle);
+        for (int i = 0; i < permutation.length(); i++) {
+            switch (permutation.charAt(i)) {
+                case 'L':
+                    if(this.moveLeft()) {
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    }
+                    break;
+                case 'R':
+                    if(this.moveRight()) {
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    }
+                    break;
+                case 'U':
+                    if(this.moveUp()) {
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    }
+                case 'D':
+                    if(this.moveDown()) {
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY(), fifteenPuzzle, permutation));
+                    }
+            }
+        }
     }
     //children and the following parents constructor
-    public GameNode(int followingDepth,int maxDepth,String order,int x,int y,FifteenPuzzle fifteenPuzzle) {
+    public GameNode(int followingDepth,int maxDepth,String order,int x,int y,FifteenPuzzle fifteenPuzzle,String permutation) {
         FifteenPuzzle puzzleCopy = (FifteenPuzzle) fifteenPuzzle.clone();
         this.x = x;
         this.y = y;
         this.maxDepth = maxDepth;
         this.currentDepth = followingDepth;
         this.currentBoard = puzzleCopy;
+        this.moveOrder = order;
+        System.out.println(this.currentDepth);
+        System.out.println(this.getMoveOrder());
         if(getCurrentDepth() < getMaxDepth()) {
-            new GameNode(this.getCurrentDepth() + 1,getMaxDepth(),getMoveOrder(),getX(),getY(),puzzleCopy);
+            for (int i = 0; i < permutation.length(); i++) {
+                switch (permutation.charAt(i)) {
+                    case 'L':
+                        if(this.moveLeft()) {
+                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX(), this.getY(), puzzleCopy, permutation));
+                        }
+                        break;
+                    case 'R':
+                        if(this.moveRight()) {
+                        this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX(), this.getY(), puzzleCopy, permutation));
+                        }
+                        break;
+                    case 'U':
+                        if(this.moveUp()) {
+                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY(), puzzleCopy, permutation));
+                        }
+                    case 'D':
+                        if(this.moveDown()) {
+                            this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY(), puzzleCopy, permutation));
+                        }
+                }
+            }
+
         }
 
 
@@ -90,9 +136,7 @@ public class GameNode {
         return maxDepth;
     }
 
-    public void setMaxDepth(int maxDepth) {
-        this.maxDepth = maxDepth;
-    }
+
 
     public String getMoveOrder() {
         return moveOrder;

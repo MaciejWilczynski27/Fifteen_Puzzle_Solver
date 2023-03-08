@@ -12,7 +12,7 @@ public class OverallTest {
         FifteenPuzzle fifteenPuzzle2 = new FifteenPuzzle("correctfile.txt");
         assertFalse(fifteenPuzzle1.checkBoard());
         assertTrue(fifteenPuzzle2.checkBoard());
-        GameNode gameNode = new GameNode(5,fifteenPuzzle1);
+        GameNode gameNode = new GameNode(5,fifteenPuzzle1,"RUDL");
         System.out.println(gameNode.getMoveOrder());
     }
 }
