@@ -3,7 +3,7 @@ package org.example;
 public class DFS {
     private String solution;
 
-    private int solutionLength = -1;
+    private Integer solutionLength = -1;
     private GameNode gameNode;
 
     public DFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {

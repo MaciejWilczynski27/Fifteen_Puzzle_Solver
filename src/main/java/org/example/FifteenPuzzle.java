@@ -7,9 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FifteenPuzzle implements Cloneable {
-    private final int boardWidth;
+    private final Integer boardWidth;
 
-    private final int boardHeight;
+    private final Integer boardHeight;
 
 
     private int[][] board;

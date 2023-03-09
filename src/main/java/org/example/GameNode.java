@@ -3,14 +3,14 @@ package org.example;
 import java.util.Vector;
 
 public class GameNode {
-    private final int currentDepth;
-    private int maxDepth;
+    private final Integer currentDepth;
+    private Integer maxDepth;
 
-    private int x;
+    private Integer x;
 
-    private int y;
+    private Integer y;
 
-    private boolean isCorrect;
+    private Boolean isCorrect = false;
 
     private FifteenPuzzle currentBoard;
     private Vector<GameNode> children = new Vector<>();
@@ -27,7 +27,7 @@ public class GameNode {
 
 
     //first parent node constructor
-    public GameNode(int maxDepth,FifteenPuzzle fifteenPuzzle,String permutation) {
+    public GameNode(Integer maxDepth,FifteenPuzzle fifteenPuzzle,String permutation) {
         this.x = fifteenPuzzle.findZero()[0];
         this.y = fifteenPuzzle.findZero()[1];
         this.maxDepth = maxDepth;
@@ -40,7 +40,7 @@ public class GameNode {
             switch (permutation.charAt(i)) {
                 case 'L':
                     if(this.canMoveLeft() && !this.getMoveOrder().endsWith("R")) {
-                        int buffer = fifteenPuzzle.getFieldValue(getX() - 1 , getY());
+                        Integer buffer = fifteenPuzzle.getFieldValue(getX() - 1 , getY());
                         fifteenPuzzle.setFieldValue(getX() , getY(),buffer);
                         fifteenPuzzle.setFieldValue(getX() - 1,getY(),0);
                         this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX() -  1, this.getY(), fifteenPuzzle, permutation));
@@ -78,9 +78,10 @@ public class GameNode {
                     }
             }
         }
+        currentBoard = null;
     }
     //children and the following parents constructor
-    public GameNode(int followingDepth,int maxDepth,String order,int x,int y,FifteenPuzzle fifteenPuzzle,String permutation) {
+    public GameNode(Integer followingDepth,Integer maxDepth,String order,Integer x,Integer y,FifteenPuzzle fifteenPuzzle,String permutation) {
         this.x = x;
         this.y = y;
         this.maxDepth = maxDepth;
@@ -95,7 +96,7 @@ public class GameNode {
                 switch (permutation.charAt(i)) {
                     case 'L':
                         if(this.canMoveLeft() && !this.getMoveOrder().endsWith("R")) {
-                            int buffer = fifteenPuzzle.getFieldValue(getX() - 1 , getY());
+                            Integer buffer = fifteenPuzzle.getFieldValue(getX() - 1 , getY());
                             fifteenPuzzle.setFieldValue(getX() , getY(),buffer);
                             fifteenPuzzle.setFieldValue(getX() - 1,getY(),0);
                             this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX() -  1, this.getY(), fifteenPuzzle, permutation));
@@ -135,42 +136,43 @@ public class GameNode {
             }
 
         }
+        currentBoard=null;
 
 
     }
 
 
-    public boolean canMoveLeft(){
+    public Boolean canMoveLeft(){
         if (getX() > 0) {
             return true;
         }
         return false;
     }
-    public boolean canMoveRight(){
+    public Boolean canMoveRight(){
         if (getX() < this.getCurrentBoard().getBoardWidth() - 1) {
             return true;
         }
         return false;
     }
-    public boolean canMoveUp(){
+    public Boolean canMoveUp(){
         if (getY() > 0) {
             return true;
         }
         return false;
     }
-    public boolean canMoveDown(){
+    public Boolean canMoveDown(){
         if (getY() < this.getCurrentBoard().getBoardHeight() - 1) {
             return true;
         }
         return false;
     }
 
-    public int getCurrentDepth() {
+    public Integer getCurrentDepth() {
 
         return currentDepth;
     }
 
-    public int getMaxDepth() {
+    public Integer getMaxDepth() {
         return maxDepth;
     }
 
@@ -184,11 +186,11 @@ public class GameNode {
         this.moveOrder = moveOrder + direction;
     }
 
-    public int getX() {
+    public Integer getX() {
         return x;
     }
 
-    public int getY() {
+    public Integer getY() {
         return y;
     }
 

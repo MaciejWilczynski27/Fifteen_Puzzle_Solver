@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class BFS {
     private String solution;
 
-    private int solutionLength = -1;
+    private Integer solutionLength = -1;
     private GameNode gameNode;
 
     public BFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {
