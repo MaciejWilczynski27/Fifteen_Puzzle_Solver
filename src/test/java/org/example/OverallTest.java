@@ -14,7 +14,7 @@ public class OverallTest {
         assertTrue(fifteenPuzzle2.checkBoard());
        // GameNode gameNode = new GameNode(8,fifteenPuzzle1,"LDUR");
         //System.out.println(gameNode.getMoveOrder());
-        BFS bfs = new BFS(16,fifteenPuzzle1,"LRUD");
+        BFS bfs = new BFS(10,fifteenPuzzle1,"LRUD");
         bfs.findSolution();
         System.out.println(bfs.getSolution());
         System.out.println(bfs.getSolutionLength());

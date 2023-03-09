@@ -21,18 +21,18 @@ public class FifteenPuzzle implements Cloneable {
         this.boardWidth = Integer.parseInt(numbers[0]);
         this.boardHeight = Integer.parseInt(numbers[1]);
         this.board = new int[boardWidth][boardHeight];
-        for (int i = 0; i < boardHeight; i++) {
-            for (int j = 0; j < boardWidth; j++) {
+        for (Integer i = 0; i < boardHeight; i++) {
+            for (Integer j = 0; j < boardWidth; j++) {
                 board[j][i] = Integer.parseInt(numbers[2 + j + i * boardHeight]);
             }
         }
     }
 
-    public int getFieldValue(int x, int y) {
+    public Integer getFieldValue(Integer x, Integer y) {
         return board[x][y];
     }
 
-    public void setFieldValue(int x, int y, int value) {
+    public void setFieldValue(Integer x, Integer y, Integer value) {
         board[x][y] = value;
     }
 
@@ -58,8 +58,8 @@ public class FifteenPuzzle implements Cloneable {
 
     public int[] findZero() {
         int[] cord = new int[2];
-        for (int y = 0; y < boardHeight; y++) {
-            for (int x = 0; x < boardWidth; x++) {
+        for (Integer y = 0; y < boardHeight; y++) {
+            for (Integer x = 0; x < boardWidth; x++) {
                 if (board[x][y] == 0) {
                     cord[0] = x;
                     cord[1] = y;
@@ -72,9 +72,9 @@ public class FifteenPuzzle implements Cloneable {
 
     public void print() {
         String git = "Kolumny: " + getBoardWidth() + " Wiersze " + getBoardHeight() + "\n";
-        for (int i = 0; i < boardHeight; i++) {
+        for (Integer i = 0; i < boardHeight; i++) {
             git += "\n";
-            for (int j = 0; j < boardWidth; j++) {
+            for (Integer j = 0; j < boardWidth; j++) {
                 git += board[j][i] + " ";
             }
         }
@@ -107,12 +107,12 @@ public class FifteenPuzzle implements Cloneable {
         }
     }
 
-    public boolean checkBoard() {
+    public Boolean checkBoard() {
         if (board[getBoardWidth() - 1][getBoardHeight() - 1] != 0) {
             return false;
         }
-        for (int i = 0; i < getBoardHeight(); i++) {
-            for (int j = 0; j < getBoardWidth(); j++) {
+        for (Integer i = 0; i < getBoardHeight(); i++) {
+            for (Integer j = 0; j < getBoardWidth(); j++) {
                 if (board[j][i] != 1 + j + getBoardWidth() * i) {
                     if (j != getBoardWidth() - 1 && i != getBoardHeight() - 1) {
                         return false;
@@ -124,11 +124,11 @@ public class FifteenPuzzle implements Cloneable {
         return true;
     }
 
-    public int getBoardWidth() {
+    public Integer getBoardWidth() {
         return boardWidth;
     }
 
-    public int getBoardHeight() {
+    public Integer getBoardHeight() {
         return boardHeight;
     }
 }
