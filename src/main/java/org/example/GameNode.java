@@ -28,8 +28,8 @@ public class GameNode {
 
     //first parent node constructor
     public GameNode(Integer maxDepth,FifteenPuzzle fifteenPuzzle,String permutation) {
-        this.x = fifteenPuzzle.findZero()[0];
-        this.y = fifteenPuzzle.findZero()[1];
+        this.x = fifteenPuzzle.findValue(0)[0];
+        this.y = fifteenPuzzle.findValue(0)[1];
         this.maxDepth = maxDepth;
         this.currentDepth = 0;
         this.currentBoard = fifteenPuzzle;

@@ -56,11 +56,11 @@ public class FifteenPuzzle implements Cloneable {
         return new FifteenPuzzle(this);
     }
 
-    public int[] findZero() {
+    public int[] findValue(int value) {
         int[] cord = new int[2];
         for (Integer y = 0; y < boardHeight; y++) {
             for (Integer x = 0; x < boardWidth; x++) {
-                if (board[x][y] == 0) {
+                if (board[x][y] == value) {
                     cord[0] = x;
                     cord[1] = y;
                     return cord;

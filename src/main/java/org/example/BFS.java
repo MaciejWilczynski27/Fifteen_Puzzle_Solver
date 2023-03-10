@@ -20,6 +20,8 @@ public class BFS {
     public void explore(int i,GameNode childNode) {
         if(solutionLength == - 1) {
             if (childNode.getCurrentDepth() == 0 && childNode.isCorrect()) {
+                this.setSolution(childNode.getMoveOrder());
+                this.setSolutionLength();
                 return;
             }
             for (GameNode child : childNode.getChildren()) {

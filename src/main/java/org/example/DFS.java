@@ -17,6 +17,8 @@ public class DFS {
     public void explore(GameNode childNode) {
         if(solutionLength == - 1) {
             if (childNode.isCorrect()) {
+                this.setSolution(childNode.getMoveOrder());
+                this.setSolutionLength();
                 return;
             }
             for (GameNode child : childNode.getChildren()) {
