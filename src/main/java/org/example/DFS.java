@@ -1,8 +1,8 @@
 package org.example;
 
 public class DFS {
-    private String solution;
 
+    private String solution;
     private Integer solutionLength = -1;
     private GameNode gameNode;
 
@@ -14,28 +14,6 @@ public class DFS {
             solution = gameNode.getSolution();
             solutionLength = solution.length();
         }
-    }
-
-    public void findSolution() {
-        this.explore(gameNode);
-    }
-
-    public void explore(GameNode childNode) {
-        if(solutionLength == - 1) {
-            if (childNode.isCorrect()) {
-                this.setSolution(childNode.getMoveOrder());
-                this.setSolutionLength();
-                return;
-            }
-            for (GameNode child : childNode.getChildren()) {
-                if (child.isCorrect()) {
-                    this.setSolution(child.getMoveOrder());
-                    this.setSolutionLength();
-                }
-                explore(child);
-            }
-        }
-        else return;
     }
 
 
