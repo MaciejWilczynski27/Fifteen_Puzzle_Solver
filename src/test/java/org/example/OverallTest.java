@@ -18,8 +18,8 @@ public class OverallTest {
       //  System.out.println(aStarHamming.getSolutionLength());
        // System.out.println(aStarHamming.getSolution());
        // System.out.println("KONIEC");
-       // Heuristic heuristic = new Hamming();
-       // System.out.println(heuristic.calculateHeuristic(fifteenPuzzle1));
+       //Heuristic heuristic = new Hamming();
+       //System.out.println(heuristic.calculateHeuristic(fifteenPuzzle1));
         //System.out.println(aStarHamming.calculateManhattan());
         //System.out.println(gameNode.getMoveOrder());
        // BFS bfs = new BFS(10,fifteenPuzzle2,"LRUD");
