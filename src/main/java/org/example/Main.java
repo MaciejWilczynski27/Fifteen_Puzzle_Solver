@@ -8,7 +8,7 @@ public class Main {
         //5 nazwa pliku z dodatkowymi informacjami
         try {
             FifteenPuzzle fifteenPuzzle = new FifteenPuzzle(args[0]);
-            DFS dfs = new DFS(17,fifteenPuzzle,"LUDR");
+            DFS dfs = new DFS(18,fifteenPuzzle,"LUDR");
             dfs.findSolution();
             System.out.println(dfs.getSolution());
             fifteenPuzzle.saveSolution("rozwiazanieTest.txt");

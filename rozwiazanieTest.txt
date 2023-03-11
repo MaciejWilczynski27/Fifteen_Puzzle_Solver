@@ -1,1 +1,2 @@
- Test czy dziala to wgl
+8
+DLLLDDRR

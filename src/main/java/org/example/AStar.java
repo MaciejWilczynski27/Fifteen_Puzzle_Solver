@@ -22,7 +22,6 @@ public class AStar {
        } else {
             heuristic = new Manhattan();
         }
-       heuristic.calculateHeuristic(this.fifteenPuzzle);
         while (directionFlag) {
             int left = Integer.MAX_VALUE;
             int right = Integer.MAX_VALUE;

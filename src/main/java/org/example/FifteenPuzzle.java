@@ -111,14 +111,16 @@ public class FifteenPuzzle implements Cloneable {
         if (board[getBoardWidth() - 1][getBoardHeight() - 1] != 0) {
             return false;
         }
-        for (Integer i = 0; i < getBoardHeight(); i++) {
-            for (Integer j = 0; j < getBoardWidth(); j++) {
-                if (board[j][i] != 1 + j + getBoardWidth() * i) {
-                    if (j != getBoardWidth() - 1 && i != getBoardHeight() - 1) {
-                        return false;
-                    }
+        int correctPlace = 1;
+        for (int y = 0 ; y< getBoardHeight(); y++) {
+            for (int x = 0; x < getBoardWidth(); x++) {
+                if (correctPlace == 16) {
+                    correctPlace = 0;
                 }
-
+                if (getFieldValue(x, y) != correctPlace) {
+                    return false;
+                }
+                correctPlace++;
             }
         }
         return true;
