@@ -7,7 +7,13 @@ public class DFS {
     private GameNode gameNode;
 
     public DFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {
-        gameNode = new GameNode(maxDepth,fifteenPuzzle,permutation);
+        int x = fifteenPuzzle.findValue(0)[0];
+        int y = fifteenPuzzle.findValue(0)[1];
+        gameNode = new GameNode(0,maxDepth,"",x,y,fifteenPuzzle,permutation,true);
+        if(gameNode.isSolvedFlag()) {
+            solution = gameNode.getSolution();
+            solutionLength = solution.length();
+        }
     }
 
     public void findSolution() {
