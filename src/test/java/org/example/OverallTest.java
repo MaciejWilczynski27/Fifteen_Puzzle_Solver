@@ -32,7 +32,7 @@ public class OverallTest {
         System.out.println("PRZERWA");
         BFS bfs = new BFS(20,fifteenPuzzle2,"LRUD");
         System.out.println(bfs.getSolution());
-        bfs.getSolutionLength();
+        System.out.println(bfs.getSolutionLength());
        // System.out.println(dfs.getSolution());
         //System.out.println(dfs.getSolutionLength());
     }

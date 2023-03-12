@@ -14,6 +14,7 @@ public class DFS {
             solution = gameNode.getSolution();
             solutionLength = solution.length();
         }
+        gameNode.reset();
     }
 
 

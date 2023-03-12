@@ -22,7 +22,7 @@ public class GameNode {
 
     //first parent node constructor
     //children and the following parents constructor
-    public GameNode(Integer followingDepth,Integer maxDepth,String order,Integer x,Integer y,FifteenPuzzle fifteenPuzzle,String permutation,boolean repeat) {
+    public GameNode(int followingDepth,int maxDepth,String order,Integer x,Integer y,FifteenPuzzle fifteenPuzzle,String permutation,boolean repeat) {
         if (solvedFlag) {
             return;
         }
@@ -179,5 +179,9 @@ public class GameNode {
     }
     public int getCounterStrike() {
         return counterStrike;
+    }
+    public void reset() {
+        solution = null;
+        solvedFlag = false;
     }
 }
