@@ -5,6 +5,9 @@ public class AStar {
     private int solutionLength = -1;
     private int xposition;
     private int yposition;
+    private int AStarVisited = 0;
+    private int AStarProcessed = 0;
+    private int AStarMaxDepth = 0;
     private FifteenPuzzle fifteenPuzzle;
 
     public AStar(FifteenPuzzle fifteenPuzzle) {
@@ -37,19 +40,8 @@ public class AStar {
             if(yposition < this.fifteenPuzzle.getBoardHeight() - 1) {
                 down = this.explore(3,heuristic);
             }
-            System.out.println("poczatek");
-            System.out.println(left);
-            System.out.println(right);
-            System.out.println(up);
-            System.out.println(down);
-            System.out.println(getSolution());
-            System.out.println("koniec");
             directionFlag = chooseDirection(left,right,up,down);
-
         }
-
-
-
         return false;
     }
 
@@ -57,6 +49,8 @@ public class AStar {
         if(left < right && left < up && left < down) {
             this.moveLeft();
             solution += "L";
+            this.AStarMaxDepth++;
+            this.AStarVisited++;
             if (left == 0) {
                 this.setSolutionLength(solution.length());
                 return false;
@@ -64,6 +58,8 @@ public class AStar {
         }else if(right < left && right < up && right < down) {
            this.moveRight();
            solution +="R";
+           this.AStarMaxDepth++;
+            this.AStarVisited++;
            if(right == 0) {
                this.setSolutionLength(solution.length());
               return false;
@@ -71,6 +67,8 @@ public class AStar {
         }else if(up < left && up < right && up < down) {
             this.moveUp();
             solution +="U";
+            this.AStarMaxDepth++;
+            this.AStarVisited++;
             if(right == 0) {
                 this.setSolutionLength(solution.length());
                 return false;
@@ -78,6 +76,8 @@ public class AStar {
         }else if(down < left && down < up && down < up) {
             this.moveDown();
             solution +="D";
+            this.AStarMaxDepth++;
+            this.AStarVisited++;
             if(right == 0) {
                 this.setSolutionLength(solution.length());
                 return false;
@@ -95,6 +95,7 @@ public class AStar {
     //remis(2 wartosci rowne) - 4
     public int explore(int direction,Heuristic heuristic) {
         int buffer = Integer.MAX_VALUE;
+        this.AStarProcessed++;
         switch (direction){
             case 0:
                 this.moveLeft();
@@ -159,5 +160,17 @@ public class AStar {
 
     public int getSolutionLength() {
         return solutionLength;
+    }
+
+    public int getAStarVisited() {
+        return AStarVisited;
+    }
+
+    public int getAStarProcessed() {
+        return AStarProcessed;
+    }
+
+    public int getAStarMaxDepth() {
+        return AStarMaxDepth;
     }
 }

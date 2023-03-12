@@ -6,6 +6,9 @@ public class BFS {
     private String solution;
 
     private int solutionLength = -1;
+    private int bfsVisited = 0;
+    private int bfsProcessed = 0;
+    private int bfsMaxDepth = 0;
     private GameNode gameNode;
 
     public BFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {
@@ -20,6 +23,9 @@ public class BFS {
                 solutionLength = solution.length();
                 break;
         }
+            bfsVisited = gameNode.getVisited();
+            bfsProcessed = gameNode.getProcessed();
+            bfsMaxDepth = gameNode.getMaxDepth();
             gameNode.reset();
     }
     }
@@ -42,4 +48,17 @@ public class BFS {
     public void setSolutionLength() {
         this.solutionLength = solution.length();
     }
+
+    public int getBfsVisited() {
+        return bfsVisited;
+    }
+
+    public int getBfsProcessed() {
+        return bfsProcessed;
+    }
+
+    public int getBfsMaxDepth() {
+        return bfsMaxDepth;
+    }
 }
+

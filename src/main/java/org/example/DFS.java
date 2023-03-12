@@ -5,6 +5,9 @@ public class DFS {
     private String solution;
     private Integer solutionLength = -1;
     private GameNode gameNode;
+    private int dfsVisited = 0;
+    private int dfsProcessed = 0;
+    private int dfsMaxDepth = 0;
 
     public DFS(int maxDepth, FifteenPuzzle fifteenPuzzle, String permutation) {
         int x = fifteenPuzzle.findValue(0)[0];
@@ -14,6 +17,9 @@ public class DFS {
             solution = gameNode.getSolution();
             solutionLength = solution.length();
         }
+        dfsVisited = gameNode.getVisited();
+        dfsProcessed = gameNode.getProcessed();
+        dfsMaxDepth = gameNode.getMaxDepth();
         gameNode.reset();
     }
 
@@ -33,5 +39,17 @@ public class DFS {
 
     public void setSolutionLength() {
         this.solutionLength = solution.length();
+    }
+
+    public int getDfsVisited() {
+        return dfsVisited;
+    }
+
+    public int getDfsProcessed() {
+        return dfsProcessed;
+    }
+
+    public int getDfsMaxDepth() {
+        return dfsMaxDepth;
     }
 }

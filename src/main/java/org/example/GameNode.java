@@ -5,7 +5,10 @@ import java.util.Vector;
 public class GameNode {
 
     private static boolean solvedFlag = false;
-    public static int counterStrike = 0;
+    public static int visited = 0;
+    public static int processed = 0;
+
+    public static int maxReachedDepth = 0;
     private static String solution;
     private int currentDepth;
     private int maxDepth;
@@ -26,12 +29,16 @@ public class GameNode {
         if (solvedFlag) {
             return;
         }
-        counterStrike++;
+        processed++;
+        visited++;
         this.x = x;
         this.y = y;
         this.maxDepth = maxDepth;
         this.currentDepth = followingDepth;
         this.currentBoard = fifteenPuzzle;
+        if(maxReachedDepth < this.currentDepth) {
+            maxReachedDepth = this.currentDepth;
+        }
         this.moveOrder = order;
         if(!repeat) {
             if(currentDepth == maxDepth && getCurrentBoard().checkBoard()) {
@@ -55,9 +62,9 @@ public class GameNode {
                                 fifteenPuzzle.setFieldValue(getX(), getY(), buffer);
                                 fifteenPuzzle.setFieldValue(getX() - 1, getY(), 0);
                                 this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "L", this.getX() - 1, this.getY(), fifteenPuzzle, permutation,repeat));
+                                this.children.clear();
                                 fifteenPuzzle.setFieldValue(getX() - 1, getY(), buffer);
                                 fifteenPuzzle.setFieldValue(getX(), getY(), 0);
-                                this.children.clear();
                             }
                             break;
                         case 'R':
@@ -66,9 +73,9 @@ public class GameNode {
                                 fifteenPuzzle.setFieldValue(getX(), getY(), buffer);
                                 fifteenPuzzle.setFieldValue(getX() + 1, getY(), 0);
                                 this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "R", this.getX() + 1, this.getY(), fifteenPuzzle, permutation,repeat));
+                                this.children.clear();
                                 fifteenPuzzle.setFieldValue(getX() + 1, getY(), buffer);
                                 fifteenPuzzle.setFieldValue(getX(), getY(), 0);
-                                this.children.clear();
                             }
                             break;
                         case 'U':
@@ -77,9 +84,9 @@ public class GameNode {
                                 fifteenPuzzle.setFieldValue(getX(), getY(), buffer);
                                 fifteenPuzzle.setFieldValue(getX(), getY() - 1, 0);
                                 this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "U", this.getX(), this.getY() - 1, fifteenPuzzle, permutation,repeat));
+                                this.children.clear();
                                 fifteenPuzzle.setFieldValue(getX(), getY() - 1, buffer);
                                 fifteenPuzzle.setFieldValue(getX(), getY(), 0);
-                                this.children.clear();
                             }
                         case 'D':
                             if (this.canMoveDown() && !this.getMoveOrder().endsWith("U")) {
@@ -87,9 +94,9 @@ public class GameNode {
                                 fifteenPuzzle.setFieldValue(getX(), getY(), buffer);
                                 fifteenPuzzle.setFieldValue(getX(), getY() + 1, 0);
                                 this.children.add(new GameNode(this.getCurrentDepth() + 1, this.getMaxDepth(), this.getMoveOrder() + "D", this.getX(), this.getY() + 1, fifteenPuzzle, permutation,repeat));
+                                this.children.clear();
                                 fifteenPuzzle.setFieldValue(getX(), getY() + 1, buffer);
                                 fifteenPuzzle.setFieldValue(getX(), getY(), 0);
-                                this.children.clear();
                             }
                     }
                 }
@@ -177,11 +184,17 @@ public class GameNode {
     public String getSolution() {
         return solution;
     }
-    public int getCounterStrike() {
-        return counterStrike;
+    public int getVisited() {
+        return visited;
+    }
+    public int getProcessed() {
+        return processed;
     }
     public void reset() {
         solution = null;
         solvedFlag = false;
+        visited = 0;
+        processed = 0;
+        maxReachedDepth = 0;
     }
 }

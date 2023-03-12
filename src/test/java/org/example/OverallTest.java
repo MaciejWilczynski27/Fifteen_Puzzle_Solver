@@ -22,12 +22,18 @@ public class OverallTest {
         System.out.println(aStarHamming2.getSolutionLength());
         System.out.println(aStarHamming2.getSolution());
         System.out.println("KONIEC");
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.start();
         DFS dfs = new DFS(20,fifteenPuzzle2,"ULRD");
         System.out.println(dfs.getSolution());
         System.out.println("PRZERWA");
         BFS bfs = new BFS(20,fifteenPuzzle4,"DURL");
         System.out.println(bfs.getSolution());
         System.out.println(bfs.getSolutionLength());
+    FileManagement fileManagement = new FileManagement();
+        System.out.println(stopwatch.stop());
+        System.out.println(fileManagement.extraInfoFile(2,5,7,20, stopwatch.stop()));
+        fileManagement.saveToFile("staty.txt",fileManagement.extraInfoFile(2,5,7,20, stopwatch.stop()));
        // System.out.println(dfs.getSolution());
         //System.out.println(dfs.getSolutionLength());
     }
