@@ -145,9 +145,6 @@ public class GameNode {
         return moveOrder;
     }
 
-    public void addMove(String moveOrder,String direction) {
-        this.moveOrder = moveOrder + direction;
-    }
 
     public int getX() {
         return x;
@@ -157,24 +154,9 @@ public class GameNode {
         return y;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 
     public FifteenPuzzle getCurrentBoard() {
         return currentBoard;
-    }
-
-    public void setCurrentBoard(FifteenPuzzle currentBoard) {
-        this.currentBoard = currentBoard;
-    }
-
-    public Vector<GameNode> getChildren() {
-        return children;
     }
 
     public boolean isSolvedFlag() {

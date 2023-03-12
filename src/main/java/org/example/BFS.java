@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class BFS {
     private String solution;
@@ -37,17 +36,11 @@ public class BFS {
         return solution;
     }
 
-    public void setSolution(String solution) {
-        this.solution = solution;
-    }
 
     public int getSolutionLength() {
         return solutionLength;
     }
 
-    public void setSolutionLength() {
-        this.solutionLength = solution.length();
-    }
 
     public int getBfsVisited() {
         return bfsVisited;

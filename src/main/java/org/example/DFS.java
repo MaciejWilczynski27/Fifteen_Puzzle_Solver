@@ -29,17 +29,11 @@ public class DFS {
         return solution;
     }
 
-    public void setSolution(String solution) {
-        this.solution = solution;
-    }
 
     public int getSolutionLength() {
         return solutionLength;
     }
 
-    public void setSolutionLength() {
-        this.solutionLength = solution.length();
-    }
 
     public int getDfsVisited() {
         return dfsVisited;
