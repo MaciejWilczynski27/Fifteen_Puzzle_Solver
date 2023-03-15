@@ -24,7 +24,7 @@ public class OverallTest {
         System.out.println("KONIEC");
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.start();
-        DFS dfs = new DFS(20,fifteenPuzzle2,"ULRD");
+        DFS dfs = new DFS(22,fifteenPuzzle2,"ULRD");
         System.out.println(dfs.getSolution());
         System.out.println("PRZERWA");
         BFS bfs = new BFS(20,fifteenPuzzle4,"DURL");

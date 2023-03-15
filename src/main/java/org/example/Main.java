@@ -33,11 +33,10 @@ public class Main {
                     fileManagement.saveToFile(args[4],fileManagement.extraInfoFile(dfs.getSolutionLength(), dfs.getDfsVisited(), dfs.getDfsProcessed(), dfs.getDfsMaxDepth(), timeElapsed));
                     break;
                 case "astr":
-                    AStar aStar = new AStar(fifteenPuzzle);
-                    System.out.println("gitara");
                     switch (args[1]){
                         case "hamm":
                             stopwatch.start();
+                            AStar aStar = new AStar(fifteenPuzzle);
                             aStar.findSolution(true);
                             timeElapsed = stopwatch.stop();
                             fileManagement.saveToFile(args[3],fileManagement.solutionFileContent(aStar.getSolutionLength(), aStar.getSolution()));
@@ -45,10 +44,11 @@ public class Main {
                             break;
                         case "manh":
                             stopwatch.start();
-                            aStar.findSolution(false);
+                            AStar aStar1 = new AStar(fifteenPuzzle);
+                            aStar1.findSolution(false);
                             timeElapsed = stopwatch.stop();
-                            fileManagement.saveToFile(args[3],fileManagement.solutionFileContent(aStar.getSolutionLength(), aStar.getSolution()));
-                            fileManagement.saveToFile(args[4],fileManagement.extraInfoFile(aStar.getSolutionLength(), aStar.getAStarVisited(), aStar.getAStarProcessed(), aStar.getAStarMaxDepth(), timeElapsed));
+                            fileManagement.saveToFile(args[3],fileManagement.solutionFileContent(aStar1.getSolutionLength(), aStar1.getSolution()));
+                            fileManagement.saveToFile(args[4],fileManagement.extraInfoFile(aStar1.getSolutionLength(), aStar1.getAStarVisited(), aStar1.getAStarProcessed(), aStar1.getAStarMaxDepth(), timeElapsed));
                             break;
                         default:
                             throw new RuntimeException("Niepoprawne argumenty1");

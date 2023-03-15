@@ -50,7 +50,6 @@ public class AStar {
             this.moveLeft();
             solution += "L";
             this.AStarMaxDepth++;
-            this.AStarVisited++;
             if (left == 0) {
                 this.setSolutionLength(solution.length());
                 return false;
@@ -96,6 +95,7 @@ public class AStar {
     public int explore(int direction,Heuristic heuristic) {
         int buffer = Integer.MAX_VALUE;
         this.AStarProcessed++;
+        this.AStarVisited++;
         switch (direction){
             case 0:
                 this.moveLeft();
