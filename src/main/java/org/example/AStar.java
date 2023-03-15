@@ -4,6 +4,7 @@ public class AStar {
     private String solution = "";
     private int solutionLength = -1;
     private int xposition;
+    String previousMove = "previousMove";
     private int yposition;
     private int AStarVisited = 0;
     private int AStarProcessed = 0;
@@ -18,6 +19,9 @@ public class AStar {
 
 //true to hamming, false to manhattan
     public boolean findSolution(boolean option) {
+        if(fifteenPuzzle.checkBoard()) {
+            return true;
+        }
         boolean directionFlag = true;
         Heuristic heuristic;
         if(option) {
@@ -30,14 +34,14 @@ public class AStar {
             int right = Integer.MAX_VALUE;
             int up = Integer.MAX_VALUE;
             int down = Integer.MAX_VALUE;
-            if(xposition > 0)
+            if(xposition > 0 && !previousMove.equals("right"))
                 left = this.explore(0,heuristic);
-            if(xposition < this.fifteenPuzzle.getBoardWidth() - 1) {
+            if(xposition < this.fifteenPuzzle.getBoardWidth() - 1 && !previousMove.equals("left")) {
                 right = this.explore(1,heuristic);
             }
-            if(yposition > 0)
+            if(yposition > 0 && !previousMove.equals("down"))
                 up = this.explore(2,heuristic);
-            if(yposition < this.fifteenPuzzle.getBoardHeight() - 1) {
+            if(yposition < this.fifteenPuzzle.getBoardHeight() - 1 && !previousMove.equals("up")) {
                 down = this.explore(3,heuristic);
             }
             directionFlag = chooseDirection(left,right,up,down);
@@ -47,6 +51,7 @@ public class AStar {
 
     public boolean chooseDirection(int left,int right, int up, int down) {
         if(left < right && left < up && left < down) {
+            previousMove = "left";
             this.moveLeft();
             solution += "L";
             this.AStarMaxDepth++;
@@ -55,6 +60,7 @@ public class AStar {
                 return false;
             }
         }else if(right < left && right < up && right < down) {
+            previousMove = "right";
            this.moveRight();
            solution +="R";
            this.AStarMaxDepth++;
@@ -64,6 +70,7 @@ public class AStar {
               return false;
            }
         }else if(up < left && up < right && up < down) {
+            previousMove = "up";
             this.moveUp();
             solution +="U";
             this.AStarMaxDepth++;
@@ -73,6 +80,7 @@ public class AStar {
                 return false;
             }
         }else if(down < left && down < up && down < up) {
+            previousMove = "down";
             this.moveDown();
             solution +="D";
             this.AStarMaxDepth++;
